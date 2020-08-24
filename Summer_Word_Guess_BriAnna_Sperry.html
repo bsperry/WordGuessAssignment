@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<!--BriAnna Sperry Section 1
+Description:
+
+-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Summer Word Guess Assignment: BriAnna Sperry</title>
+
+
+    <script>
+        //global variables
+            //songs array
+        var asSongs = ["rocklobster", "peoplearepeople", "onceinalifetime", "sweetdreams", "missionaryman", "safetydance", "onlyalad", "whipit", "99redballoons"]; 
+        var sTitle = "";
+        var sTitleHidden = "";
+            //Array of Contestant objects that holds contestant name & numberOfGamesPlayed they have played
+        var aoContestant = [];
+            //availabe and used characters
+        var asAvailableCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        var asValidCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        var asUsedCharacters = "";
+            //use for guess input value
+        var sGuess = "";
+            //used for underscoring
+        var sUnderscore = "_";
+
+
+
+        //Classes
+            //keeps first, last name and age
+        class Person
+        {
+            //attributes
+            firstName;
+            lastName;
+            age;
+
+            //method/constructor
+            constructor(firstName, lastName)
+            {
+                this.firstName = firstName;
+                this.lastName = lastName;
+            }
+        }
+
+            //Keeps track of number of games, total number of guesses and performs alerts
+            //Uses global variables that’s an array of Contestant object
+        class Contestant extends Person
+        {
+            //attributes
+            numberOfGamesPlayed = 0;
+            totalNumberOfGuesses = 0;
+                //Keeps track of all the games play
+                //an array of GamesPlayed OJBECT
+            gamesPlayed = [];
+
+
+            //methods/constructor
+                //Receives parent’s attributes and loads them properly, AND then initialize the numberOfGamesPlayed, totalNumberOfGuesses, and the gamesPlayed attributes
+            constructor(firstName, lastName, numberOfGamesPlayed, totalNumberOfGuesses, gamesPlayed)
+            {
+                super(firstName, lastName);
+                this.numberOfGamesPlayed = numberOfGamesPlayed;
+                this.totalNumberOfGuesses = totalNumberOfGuesses;
+
+                this.gamesPlayed.push(new GamesPlayed());
+            }
+                
+                // concatenates name
+            getFullName()
+            {
+                return(this.firstName + " " + this.lastName);
+            }
+
+                //Returns a message with first and last name concatenated along with the number of guesses and completely games
+            showResults()
+            {
+                //??DONT THINK THIS IS RIGHT
+                //look at the current game finishedGame attribute
+                if(this.gamesPlayed[gamesPlayed.length-1].finishedGame == true)
+                {
+                    return (this.getFullName() + " has made " + this.gamesPlayed[gamesPlayed.length-1].guessCount + " guesses" );
+                    }
+                //?? in BOLD
+                else 
+                {
+                    return (this.getFullName() + " has not finished a game");
+                }    
+            }
+
+
+        }
+
+            //tracks number of guesses in a game and whether game is finished
+        class GamesPlayed
+        {
+            //attributes
+            guessCount = 0;
+            finishedGame = false;
+
+                //no parameters, set guess to 0 and finishedgame to false
+            constructor()
+            {
+                this.guessCount = 0;
+                this.finishedGame = false;
+            }
+
+        }
+
+
+        //Functions
+            //Makes screen look like it did at first & no games had been played
+        function resetMe()
+        {
+            aoContestant = [];
+            asAvailableCharacters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+            asUsedCharacters = "";
+
+            //??make fields disappear
+
+            document.getElementById("btnPlayAgainSame").style.display = "none";
+            document.getElementById("btnPlayAgainDiff").style.display = "none";
+            document.getElementById("displayTitleName").style.display = "none";
+            document.getElementById("titleNote").style.display = "none";
+            document.getElementById("fsAvailable").style.display = "none";
+            document.getElementById("fsUsed").style.display = "none";
+            document.getElementById("fsPlay").style.display = "none";
+            document.getElementById("btnShowGames").style.display = "none";
+
+            //??Clear out local storage
+
+        }
+
+            //Require user to enter first and last name via prompt
+            //Create new contestant object & assign to aoContestants[] Global array & Play Game button then disappears
+            //Track used & unused characters & Generate random num and use to extract a song title to solve from the array from asSongs
+        function playGame()
+        {
+            //local variable 
+            let sFirstName = prompt("Enter your first name");
+            let sLastName = prompt("Enter you last name");
+            let iNumberOfGamesPlayed = 0;
+            let iTotalNumberOfGuesses = 0;
+                
+                //Create new contestant object & assign to aoContestants[] Global array & Play Game button then disappears
+            aoContestant.push(new Contestant(sFirstName,sLastName,iNumberOfGamesPlayed,iTotalNumberOfGuesses));
+            document.getElementById("fbtnPlayGame").style.display = "none";
+            //??  document.getElementById("fbtnPlayGame").style.display = 'none';
+
+
+
+                //Generate random num and use to extract a song title to solve from the array from asSongs
+                //??Display title for the displayTitleName with underscores in place of characters (without spaces)
+            sTitle = asSongs[Math.floor(Math.random() * 9)];
+            sTitleHidden = sUnderscore.repeat(sTitle.length); //or "_" * sTitle.length
+
+                //Make sure you are showing displayTitleName, titleNotte, fsPlay, fsAvailable, and fsUsed fieldsets html object in the html file
+            document.getElementById("displayTitleName").style.display = "block";
+            document.getElementById("titleNote").style.display = "block";
+            document.getElementById("fsAvailable").style.display = "block";
+            document.getElementById("fsUsed").style.display = "block";
+            document.getElementById("fsPlay").style.display = "block";
+
+                //Cursor should then be programmatically placed in the next input text area called inputLetter
+            document.getElementById("inputLetter").focus();
+
+        }
+
+        function guessCharacter()
+        {
+                //set sGuess = to user input
+            sGuess = document.getElementById("btnGuess").value;
+                //Check to see if letter is available against the asAvailableCharacters (case doesn’t matter)
+            
+            if(sGuess == )
+
+        }
+
+
+    </script>
+</head>
+
+<body>
+    <input type="button" value="Play Game" id="btnPlayGame" onclick="playGame()" >
+    <br><br>
+    <input type="button" id="btnPlayAgainSame" value="Play Again with SAME user?" hidden>
+    <br><br>
+    <input type="button" id="btnPlayAgainDiff" value="Play Again with DIFFERENT user?" hidden>
+    <br><br>    
+    <p id="displayTitleName" hidden></p>
+    <p id="titleNote" hidden>NOTE: Spaces have been removed from the song title</p>
+    <br><br>
+    <fieldset  id="fsAvailable" hidden style="width:0px">
+        <legend><strong><em>Available Characters:</em></strong></legend>
+            <p id="availableChars"></p>
+    </fieldset>
+    <br><br>
+    <fieldset id="fsUsed" hidden style="width:0px">
+        <legend><strong><em>Used Characters:</em></strong></legend>
+        <p id="usedChars"></p>
+    </fieldset>
+    <br><br>
+    <fieldset id="fsPlay" hidden style="width:0px">
+        <label for="input">Enter Character:</label>
+        <input type="text" id="inputLetter" maxlength="1">
+        <br><br>
+        <input type="button" id="btnGuess" value="Submit Character" onclick="guessCharacter()">
+        <br><br>
+        <p><strong>OR</strong></p>
+        <br><br>
+        <label for="finalGuess">Enter Your Final Guess:</label>
+        <input type="text" id="finalGuess">
+        <em>NOTE:But if you guess wrong, 26 will be added to your guess count</em>
+        <br><br>
+        <input type="button" id="btnFinalGuess" value="Final Guess">
+        <br><br>
+    </fieldset>
+    <br><br>
+    <input type="button" id="btnShowGames" value="Show Games">
+    <br><br>
+    <input type="button" id="btnResetForm" value="Reset Form" onclick="resetMe()">    
+</body>
+
+</html>
