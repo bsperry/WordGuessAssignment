@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!--BriAnna Sperry Section 1
-Description: TESTING Git 2.0 
+Description: TESTING Git 2.1 
 
 -->
 <html lang="en">
@@ -173,9 +173,68 @@ Description: TESTING Git 2.0
         {
                 //set sGuess = to user input
             sGuess = document.getElementById("btnGuess").value;
-                //Check to see if letter is available against the asAvailableCharacters (case doesn’t matter)
-            
-            if(sGuess == )
+                //case doesn’t matter
+            sGuess = sGuess.toUpperCase();
+                //Check to see if letter is valid character
+            if(asValidCharacters.includes(sGuess) == false)
+            {
+                alert("Invalid guess");
+            }
+            else 
+            {
+                //check and see if character availabe
+                if(asAvailableCharacters.includes(sGuess) == true)
+                {
+                    //??add to asUsedCharacters
+                    //Remove from asAvailableCharacters
+                    //update sTitleHidden with characters 
+                    //display asAvaibleCharacters and asUsedCharacter and sTitleHidden
+                    //increment guessCount
+                    //set focus back to input area .focus().select()
+                }
+                //character has been used 
+                else
+                {
+                    alert("You have already guessed this character. Guess a character from the Available Characters.");
+                }
+            }
+
+            //??not sure if this is how you call a function in a function 
+            checkWin();
+
+        }
+
+        function checkWin()
+        {
+            //Check to see if there are anymore characters in the title
+            if(sTitleHidden == sTitle) //??could also say if sTitleHidden doesn't contain "_"
+            {
+                if(guessCount < 26)
+                {
+                    alert("You solved it with " + guessCount + " guesses!");
+                }
+                else
+                {
+                    alert("You took too many guesses.");
+                }
+                //??game is over; update the Contestant and GamesPlayed objects in the array by..
+                    //update totalNumberOfGuesses, finishedGame, increment numberOfGamesPlayed
+                //??clear out the input
+                //reset asAvailableCharacters and asUsedCharacter (and displays)
+
+                //Hide the fsAvailable, fsUsed, and fsPlay fieldsets
+                //??Display the Play Again with the SAME user button and the Play Again with DIFFERENT user button
+
+            }
+            else
+            {
+                //??Delete this before turning in, just using for testing purposes
+                alert("You haven't finished the game. Keep guessing!")
+            }
+        }
+
+        function showGames()
+        {
 
         }
 
